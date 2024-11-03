@@ -1,0 +1,193 @@
+body {
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+.modalBackground {
+    display: none;
+    background: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.modalActive {
+    position: absolute;
+    width: 300px;
+    height: 100px;
+    top: calc(50% - 250px);
+    left: calc(50% - 175px);
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    cursor: default;
+    padding: 40px 20px;
+}
+
+.modalClose {
+    font-family: var(--font-regular);
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.modalWindow {
+    position: relative;
+}
+
+
+.easyQuestionIcon {
+    margin: 0;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border-radius: 30px;
+}
+
+.hardQuestionIcon {
+    margin: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    background-color: red;
+}
+
+
+.game-module {
+    display: flex;
+    max-width: 1194px;
+
+    width: 1194px;
+    height: 796px;
+    margin: auto;
+}
+
+#first {
+    position: absolute;
+    width: 30px;
+    background-color: green;
+    transition: all .65s ease-in-out;
+}
+
+#second {
+    position: absolute;
+    width: 30px;
+    background-color: yellow;
+    transition: all .65s ease-in-out;
+}
+
+#mainField {
+    position: relative;
+}
+
+.questionButton {
+    margin: 10px;
+}
+
+.main {
+    max-width: 1280px;
+    margin: auto;
+    padding: 30px 30px;
+
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.header {
+    background-image: url('headerImg.jpg');
+    width: 1194px;
+    height: 796px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    flex-direction: column;
+}
+
+.map {
+    background-image: url('map.jpg');
+    background-size: 1194px 796px;
+
+    width: 1194px;
+    height: 796px;
+    margin: auto;
+}
+
+.header-text {
+    text-align: center;
+    max-width: 70%;
+    font-size: 50px;
+    color: white;
+    border: 3px solid white;
+    z-index: 1;
+    margin: 10px;
+}
+
+
+.header-b {
+    position: absolute;
+    width: 1194px;
+    height: 796px;
+    background-color: black;
+    opacity: .6;
+    z-index: 0;
+}
+
+.control-panel {
+    margin: 30px;
+}
+
+.question-panel {
+    cursor: pointer;
+    border: 1px solid black;
+    width: 600px;
+    border-radius: 10px;
+    padding: 30px;
+    position: relative;
+    margin: 30px;
+
+}
+
+.question-panel p {
+    font-size: 30px;
+}
+
+.closed-answer {
+    display: none;
+}
+
+.answer {
+    font-weight: 700;
+}
+
+.close-panel {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background-image: url('openPanel.png');
+    transition: all .65s ease-in-out;
+    color: black;
+    background-color: white;
+    size: 20px;
+}
+
+
+.close-panel-active {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    color: white;
+    background-color: #444;
+    transition: all .65s ease-in-out;
+    background-image: url('closePanel.png');
+    size: 20px;
+    
+}
