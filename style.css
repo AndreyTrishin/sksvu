@@ -191,3 +191,14 @@ body {
     size: 20px;
     
 }
+
+.normal-question-panel {
+    background-color: hsla(231, 47%, 46%, 1);
+    color: white;
+}
+
+
+.hard-question-panel {
+    background-color: hsla(359, 74%, 63%, 1);
+    color: white;
+}
