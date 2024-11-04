@@ -30,10 +30,32 @@
 // ];
 
 var coordinates = [
-    [703, 515, 1],
-    [656, 431],
-    [548, 340],
-    [478, 220]
+    [510, 945, 1],
+    [480, 880],
+    [410, 780],
+    [320, 715],
+    [230, 650],
+    [165, 595, 1],
+    [220, 550],
+    [250, 490],
+    [190, 390],
+    [300, 355, 1],
+    [365, 320],
+    [405, 250],
+    [360, 200, 1],
+    [425, 135],
+    [530, 110],
+    [630, 120, 1],
+    [730, 125,],
+    [870, 170,],
+    [980, 210],
+    [980, 315],
+    [840, 260, 1],
+    [760, 317],
+    [835, 428],
+    [939, 592],
+    [1070, 575],
+    [1147, 541, 1]
 ];
 
 
@@ -45,7 +67,7 @@ var commands = {
 }
 
 var easyQuestionList = [
-    { title: 'Разминка', name: 'easy'},
+    { title: 'Разминка', name: 'easy' },
     { id: 1, question: "Назовите дату Швейцарского похода А. В. Суворова", answer: "10 (21) сентября 1799 года", status: false, answered: false, difficulty: 1 },
     { id: 2, question: "Какая страна была противником России в этом походе?", answer: "Швейцария", status: false, answered: false, difficulty: 1 },
     {
@@ -94,7 +116,7 @@ var easyQuestionList = [
     { id: 18, question: "Укажите на карте основные сражения и даты Швейцарского похода. ", answer: "", status: false, answered: false, difficulty: 2, qMaterial: ['Карта', '16.jpg'] },
     { id: 19, question: "Выделите границу Швейцарии", answer: "", status: false, answered: false, difficulty: 2, qMaterial: ['Карта', '20.jpg'] },
     { id: 20, question: "Обозначьте на карте маршрут армии А. Суворова в Швейцарском походе. ", answer: "", status: false, answered: false, difficulty: 2, qMaterial: ['Карта', '20.jpg'] },
-    { title: 'Искусство и память', name: 'hard'},
+    { title: 'Искусство и память', name: 'hard' },
     {
         id: 21, question: "Назовите два произведения искусства (картины, скульптуры, литературные произведения), посвященных Швейцарскому походу.", answer: "«Переход Суворова через Альпы» Василия Сурикова, написанная в 1899 году. На картине изображён один из эпизодов Швейцарского похода Суворова, переход через Паникс, когда армия уже спускалась с гор. \n«Переход Суворова через перевал Рингенкопф (Паникс)» Александра Коцебу. На полотне представлен другой момент похода — переход через перевал, когда армия уже спускалась с гор.\nТакже в память о швейцарском походе Александра Суворова в горах был высечен 12-метровый гранитный крест. (картинку вы видели на прошлых вопросах) \nЕщё одно произведение искусства, посвящённое этому событию, — картина Александра Шарлеманя «Торжественная встреча Суворова в Милане в апреле 1799 года»(середина XIX века).", status: false, answered: false, difficulty: 3, anMaterials:
             [['«Переход Суворова через Альпы» Василия Сурикова', '21_1.jpg'],
@@ -151,11 +173,11 @@ statusButton.addEventListener('click', () => {
 function movePlayer() {
 
     if (commands.first.position == commands.second.position) {
-        firstButton.style.cssText = 'left: ' + (coordinates[commands.first.position][1] + 15) + 'px; top: ' + (coordinates[commands.first.position][0] - 30) + 'px;';
-        secondButton.style.cssText = 'left: ' + (coordinates[commands.second.position][1] - 15) + 'px; top: ' + (coordinates[commands.second.position][0] - 30) + 'px;';
+        firstButton.style.cssText = 'top: ' + ((coordinates[commands.first.position][1] - 30) / 1.3) + 'px; left: ' + ((coordinates[commands.first.position][0] + 15) - 50) + 'px;';
+        secondButton.style.cssText = 'top: ' + ((coordinates[commands.second.position][1] - 30) / 1.3) + 'px; left: ' + ((coordinates[commands.second.position][0] - 15) - 50) + 'px;';
     } else {
-        firstButton.style.cssText = 'left: ' + coordinates[commands.first.position][1] + 'px; top: ' + (coordinates[commands.first.position][0] - 30) + 'px;';
-        secondButton.style.cssText = 'left: ' + (coordinates[commands.second.position][1]) + 'px; top: ' + (coordinates[commands.second.position][0] - 30) + 'px;';
+        firstButton.style.cssText = 'top: ' + ((coordinates[commands.first.position][1] - 30) / 1.3) + 'px; left: ' + ((coordinates[commands.first.position][0]) - 50) + 'px;';
+        secondButton.style.cssText = 'top: ' + ((coordinates[commands.second.position][1] - 30) / 1.3) + 'px; left: ' + ((coordinates[commands.second.position][0]) - 50) + 'px;';
     }
 }
 
@@ -179,8 +201,9 @@ document.querySelector('#clearStorage').addEventListener('click', () => {
 for (let i = 0; i < coordinates.length; i++) {
     let button = document.createElement('button');
     button.className = coordinates[i][2] == null ? 'easyQuestionIcon' : 'hardQuestionIcon';
-    button.style.cssText = 'position: absolute; left: ' + coordinates[i][1] + 'px; top: ' + coordinates[i][0] + 'px;';
+    button.style.cssText = 'position: absolute; left: ' + (coordinates[i][0] - 50) + 'px; top: ' + (coordinates[i][1] / 1.3) + 'px;';
     button.textContent = i + 1;
+
     button.addEventListener('click', () => {
         changePlayer();
         if (commands.first.isActive) {
@@ -205,7 +228,7 @@ for (let i = 0; i < easyQuestionList.length; i++) {
     dialogPanel.addEventListener('click', (event) => dialog.close());
 
     let questionPanel = document.createElement('div');
-    let closeButton = document.createElement('div');
+    let closeButton = document.createElement('button');
     let question = document.createElement('p');
     let answer = document.createElement('p');
     let answerMaterialDiv;
@@ -231,6 +254,7 @@ for (let i = 0; i < easyQuestionList.length; i++) {
         closeButton.className = 'close-panel';
         question.className = 'question';
         answer.className = 'closed-answer';
+        closeButton.textContent = '▼';
 
         let answerMaterial;
 
@@ -292,12 +316,22 @@ for (let i = 0; i < easyQuestionList.length; i++) {
                 }
             }
 
+            // let applyAnswer = document.createElement('button');
+            // applyAnswer.textContent = "засчитать ответ";
+            // applyAnswer.addEventListener('click', () => {
+            //     easyQuestionList[i].answered = !easyQuestionList[i].answered;
+            //     console.log(easyQuestionList[i]);
+            // })
+            // questionPanel.appendChild(applyAnswer);
+
             if (easyQuestionList[i].status) {
                 answer.className = 'answer';
                 closeButton.className = 'close-panel-active';
+                closeButton.textContent = '▲';
             } else {
                 answer.className = 'closed-answer';
                 closeButton.className = 'close-panel';
+                closeButton.textContent = '▼';
 
             }
         });
@@ -309,6 +343,15 @@ for (let i = 0; i < easyQuestionList.length; i++) {
 
         if (answerMaterialDiv)
             questionPanel.appendChild(answerMaterialDiv);
+        // if (easyQuestionList[i].answered) {
+
+        //     let answeredQuestion = document.createElement('div');
+        //     answeredQuestion.className = 'question-panel-answered';
+        //     questionPanel.appendChild(answeredQuestion);
+        // }
+
+
+
 
         questionSection.appendChild(questionPanel);
     }
