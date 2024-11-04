@@ -76,7 +76,11 @@ var easyQuestionList = [
     {id: 18, question: "Укажите на карте основные сражения и даты Швейцарского похода. ", answer: "", status: false, answered: false, difficulty: 2},
     {id: 19, question: "Выделите границу Швейцарии", answer: "", status: false, answered: false, difficulty: 2},
     {id: 20, question: "Обозначьте на карте маршрут армии А. Суворова в Швейцарском походе. ", answer: "", status: false, answered: false, difficulty: 2},
-    {id: 21, question: "Назовите два произведения искусства (картины, скульптуры, литературные произведения), посвященных Швейцарскому походу.", answer: "«Переход Суворова через Альпы» Василия Сурикова, написанная в 1899 году. На картине изображён один из эпизодов Швейцарского похода Суворова, переход через Паникс, когда армия уже спускалась с гор. \n«Переход Суворова через перевал Рингенкопф (Паникс)» Александра Коцебу. На полотне представлен другой момент похода — переход через перевал, когда армия уже спускалась с гор.\nТакже в память о швейцарском походе Александра Суворова в горах был высечен 12-метровый гранитный крест. (картинку вы видели на прошлых вопросах) \nЕщё одно произведение искусства, посвящённое этому событию, — картина Александра Шарлеманя «Торжественная встреча Суворова в Милане в апреле 1799 года»(середина XIX века).", status: false, answered: false, difficulty: 3},
+    {id: 21, question: "Назовите два произведения искусства (картины, скульптуры, литературные произведения), посвященных Швейцарскому походу.", answer: "«Переход Суворова через Альпы» Василия Сурикова, написанная в 1899 году. На картине изображён один из эпизодов Швейцарского похода Суворова, переход через Паникс, когда армия уже спускалась с гор. \n«Переход Суворова через перевал Рингенкопф (Паникс)» Александра Коцебу. На полотне представлен другой момент похода — переход через перевал, когда армия уже спускалась с гор.\nТакже в память о швейцарском походе Александра Суворова в горах был высечен 12-метровый гранитный крест. (картинку вы видели на прошлых вопросах) \nЕщё одно произведение искусства, посвящённое этому событию, — картина Александра Шарлеманя «Торжественная встреча Суворова в Милане в апреле 1799 года»(середина XIX века).", status: false, answered: false, difficulty: 3, anMaterials: 
+        [['«Переход Суворова через Альпы» Василия Сурикова', '21_1.jpg'], 
+        ['«Переход Суворова через перевал Рингенкопф (Паникс)» Александра Коцебу.', '21_2.jpg'], 
+        ['«Торжественная встреча Суворова в Милане в апреле 1799 года»(середина XIX века) Александра Шарлеманя', '21_3.jpg']]
+    },
     {id: 22, question: "Какое событие отражает данная картина Е. Лансера? ", answer: "«Суворов на Сен-Готардском перевале» вдохновляет своих солдат.", status: false, answered: false, difficulty: 3},
     {id: 23, question: "Назовите излюбленный Суворовым способ ведения боя, представленный в труде «Наука побеждать». ", answer: "Атака. Стремительное наступление, атака, удар в штыки – это те формы ведения боя, которые главным образом признавал и использовал великий полководец", status: false, answered: false, difficulty: 3},
     {id: 24, question: "У Суворова был особенный способ сражаться: переходы он делал очень большие; когда неприятель думал, что русские ещё далеко, Суворов являлся перед ним, как снег на голову и приказывал нападать, даже иногда не выжидая, пока подойдёт всё его войско. В этих случаях он говорил: «Голова хвоста не ждёт». Весь свой способ сражаться Суворов выражал тремя словами. Какими? ", answer: "«Глазомер, быстрота, натиск»", status: false, answered: false, difficulty: 3},
@@ -176,11 +180,18 @@ for (let i = 0; i < coordinates.length; i++) {
 
 
 for (let i = 0; i < easyQuestionList.length; i++) {
+    let dialog = document.querySelector('#myDialog');
+    let dialogPanel = document.querySelector('#dialog-panel');
+    dialogPanel.addEventListener('click', (event) => dialog.close());
 
     let questionPanel = document.createElement('div');
     let closeButton = document.createElement('div');
     let question = document.createElement('p');
     let answer = document.createElement('p');
+    let answerMaterialDiv;
+    if(easyQuestionList[i].anMaterials) {
+        answerMaterialDiv = document.createElement('div');
+    }
 
     questionPanel.className = 'question-panel';
     if(easyQuestionList[i].difficulty == 2) {
@@ -188,7 +199,7 @@ for (let i = 0; i < easyQuestionList.length; i++) {
     } else if (easyQuestionList[i].difficulty == 3) {
         questionPanel.className += ' hard-question-panel';
     }
-        closeButton.className = 'close-panel';
+    closeButton.className = 'close-panel';
     question.className = 'question';
     answer.className = 'closed-answer';
 
@@ -198,6 +209,37 @@ for (let i = 0; i < easyQuestionList.length; i++) {
 
     questionPanel.addEventListener('click', () => {
         easyQuestionList[i].status = !easyQuestionList[i].status;
+
+
+
+        if(easyQuestionList[i].anMaterials) {
+            for(let j = 0; j < easyQuestionList[i].anMaterials.length; j++) {
+                let answerMaterial = document.createElement('a');
+                
+                answerMaterial.textContent = easyQuestionList[i].anMaterials[j][0];
+                answerMaterial.addEventListener('click', () => {
+                    let divv = document.querySelector('#answer-material')
+                    let img = document.createElement('img');
+                    img.src = easyQuestionList[i].anMaterials[j][1];
+                    img.className = 'answer-material';
+                    // 
+                    divv.appendChild(img);
+                    dialog.addEventListener('close', (e) => {
+                        divv.removeChild(img);
+                    });
+                    window.myDialog.showModal();
+                });
+                answerMaterialDiv.className = 'closed-answer';
+                if(easyQuestionList[i].status) {
+                    answerMaterialDiv.className = 'answer';
+                } else {
+                    answerMaterialDiv.className = 'closed-answer';
+        
+                }
+                answerMaterialDiv.appendChild(answerMaterial);
+            }
+        }
+
         
         if(easyQuestionList[i].status) {
             answer.className = 'answer';
@@ -208,46 +250,18 @@ for (let i = 0; i < easyQuestionList.length; i++) {
 
         }
     });
+  
 
     questionPanel.appendChild(question);
     questionPanel.appendChild(answer);
     questionPanel.appendChild(closeButton);
+   
+    if(answerMaterialDiv)
+    questionPanel.appendChild(answerMaterialDiv);
 
     questionSection.appendChild(questionPanel);
 }
 
-
-const modalTrigger = document.getElementsByClassName("trigger")[0];
-
-const windowInnerWidth = document.documentElement.clientWidth;
-const scrollbarWidth = parseInt(window.innerWidth) - parseInt(document.documentElement.clientWidth);
-
-const bodyElementHTML = document.getElementsByTagName("body")[0];
-const modalBackground = document.getElementsByClassName("modalBackground")[0];
-const modalClose = document.getElementsByClassName("modalClose")[0];
-const modalActive = document.getElementsByClassName("modalActive")[0];
-
-function bodyMargin() {
-    bodyElementHTML.style.marginRight = "-" + scrollbarWidth + "px";
-}
-
-bodyMargin();
-
-modalClose.addEventListener("click", function () {
-    modalBackground.style.display = "none";
-    if (windowInnerWidth >= 1366) {
-        bodyMargin();
-    }
-});
-
-modalBackground.addEventListener("click", function (event) {
-    if (event.target === modalBackground) {
-        modalBackground.style.display = "none";
-        if (windowInnerWidth >= 1366) {
-            bodyMargin();
-        }
-    }
-});
 
 
 
@@ -256,22 +270,6 @@ modalBackground.addEventListener("click", function (event) {
     // button.addEventListener('dragend', (e) => {
     //     button.style.cssText = 'position: absolute; top: ' + (e.pageY - 20) + 'px; left: ' + (e.pageX - 20) + 'px;';
     // });
-
-
-
-    
-        // modalBackground.style.display = "block";
-
-        // if (windowInnerWidth >= 1366) {
-        //     bodyMargin();
-        // }
-
-
-        // modalActive.style.left = "calc(50% - " + (175 - scrollbarWidth / 2) + "px)";
-        
-
-
-
         
 
 
