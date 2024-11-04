@@ -192,3 +192,22 @@ body {
     bottom: 30px;
     right: 30px;
 }
+
+.route-control {
+    font-size: 30px;
+    border: 1px solid black;
+    padding: 15px;
+    border-radius: 15px;
+    text-decoration: none;
+    color: black;
+}
+
+.normal {
+    background-color: hsla(231, 47%, 46%, 1);
+    color: white;
+}
+
+.hard {
+    background-color: hsla(359, 74%, 63%, 1);
+    color: white;
+}
