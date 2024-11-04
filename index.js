@@ -30,6 +30,7 @@ var coordinates = [
 
 
 
+
 var commands = {
     first: { position: isNaN(parseInt(sessionStorage.getItem('firstPos'))) ? 0 : parseInt(sessionStorage.getItem('firstPos')), color: 'green', isActive: true },
     second: { position: isNaN(parseInt(sessionStorage.getItem('secondPos'))) ? 0 : parseInt(sessionStorage.getItem('secondPos')), color: 'red', isActive: false },
