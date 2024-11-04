@@ -123,7 +123,7 @@ var easyQuestionList = [
             ['«Переход Суворова через перевал Рингенкопф (Паникс)» Александра Коцебу.', '21_2.jpg'],
             ['«Торжественная встреча Суворова в Милане в апреле 1799 года»(середина XIX века) Александра Шарлеманя', '21_3.jpg']]
     },
-    { id: 22, question: "Какое событие отражает данная картина Е. Лансера? ", answer: "«Суворов на Сен-Готардском перевале» вдохновляет своих солдат.", status: false, answered: false, difficulty: 3 },
+    { id: 22, question: "Какому именно событию посвящен этот памятник? И кого изобразил скульптор Дмитрий Тугаринов?? ", answer: "Памятник посвящен 200-летию перехода армии Суворова через Альпы. Изображены: А. Суворов и его верный спутник и проводник Антонио Гамма.", status: false, answered: false, difficulty: 3, qMaterial: [['Иллюстрация 1', '22_1.jpg'], ['Иллюстрация 2', '22_2.jpg'], ['Иллюстрация 3', '22_3.jpg'],] },
     { id: 23, question: "Назовите излюбленный Суворовым способ ведения боя, представленный в труде «Наука побеждать». ", answer: "Атака. Стремительное наступление, атака, удар в штыки – это те формы ведения боя, которые главным образом признавал и использовал великий полководец", status: false, answered: false, difficulty: 3 },
     { id: 24, question: "У Суворова был особенный способ сражаться: переходы он делал очень большие; когда неприятель думал, что русские ещё далеко, Суворов являлся перед ним, как снег на голову и приказывал нападать, даже иногда не выжидая, пока подойдёт всё его войско. В этих случаях он говорил: «Голова хвоста не ждёт». Весь свой способ сражаться Суворов выражал тремя словами. Какими? ", answer: "«Глазомер, быстрота, натиск»", status: false, answered: false, difficulty: 3 },
     { id: 25, question: "Чтобы не дать противнику укрепиться на другом берегу, Суворов приказал генералу Каменскому преследовать отступающие части французов. Французы не успели построить оборонительные сооружения у Чертова моста и спешно разобрали середину мостового пролета. Переход через пропасть стал невозможен. Однако, русские под началом князя Багратиона, проявили невероятную смекалку. После ожесточенного боя французы отступили в южном направлении Что предприняли русские войска?", answer: "Русские под началом князя Багратиона, разобрали находящееся поблизости строение на бревна, связали бревна офицерскими шарфами и, под огнем французов, перекинули через провал", status: false, answered: false, difficulty: 3 },
@@ -258,25 +258,48 @@ for (let i = 0; i < easyQuestionList.length; i++) {
 
         let answerMaterial;
 
+        let qMaterialControl;
         question.textContent = easyQuestionList[i].question;
         answer.textContent = easyQuestionList[i].answer;
-        let qMaterialControl;
         if (easyQuestionList[i].qMaterial) {
-            qMaterialControl = document.createElement('a');
-            qMaterialControl.className = 'q-material-control';
-            qMaterialControl.textContent = easyQuestionList[i].qMaterial[0];
-            qMaterialControl.addEventListener('click', () => {
-                let divv = document.querySelector('#answer-material')
-                let img = document.createElement('img');
-                img.src = easyQuestionList[i].qMaterial[1];
-                img.className = 'answer-material';
-                // 
-                divv.appendChild(img);
-                dialog.addEventListener('close', (e) => {
-                    divv.removeChild(img);
+            if (easyQuestionList[i].qMaterial.length > 2) {
+                qMaterialControl = document.createElement('div');
+                for (let j = 0; j < easyQuestionList[i].qMaterial.length; j++) {
+                    qMaterialControlItem = document.createElement('a');
+                    qMaterialControl.className = 'q-material-controls';
+                    qMaterialControlItem.textContent = easyQuestionList[i].qMaterial[j][0];
+                    qMaterialControl.appendChild(qMaterialControlItem);
+                    qMaterialControlItem.addEventListener('click', () => {
+                        let divv = document.querySelector('#answer-material')
+                        let img = document.createElement('img');
+                        img.src = easyQuestionList[i].qMaterial[j][1];
+                        img.className = 'answer-material';
+                        // 
+                        divv.appendChild(img);
+                        dialog.addEventListener('close', (e) => {
+                            divv.removeChild(img);
+                        });
+                        window.myDialog.showModal();
+                    });
+                }
+            } else {
+
+                qMaterialControl = document.createElement('a');
+                qMaterialControl.className = 'q-material-control';
+                qMaterialControl.textContent = easyQuestionList[i].qMaterial[0];
+                qMaterialControl.addEventListener('click', () => {
+                    let divv = document.querySelector('#answer-material')
+                    let img = document.createElement('img');
+                    img.src = easyQuestionList[i].qMaterial[1];
+                    img.className = 'answer-material';
+                    // 
+                    divv.appendChild(img);
+                    dialog.addEventListener('close', (e) => {
+                        divv.removeChild(img);
+                    });
+                    window.myDialog.showModal();
                 });
-                window.myDialog.showModal();
-            });
+            }
 
 
         }
