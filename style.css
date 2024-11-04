@@ -116,7 +116,7 @@ body {
     border-radius: 10px;
     padding: 30px;
     position: relative;
-    margin: 30px;
+    margin: 15px;
 
 }
 
@@ -179,4 +179,16 @@ body {
 #dialog-panel {
     width: 100%;
     height: 100%;
+}
+
+#question-section {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.up-control {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
 }
